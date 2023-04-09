@@ -1,0 +1,9 @@
+.header {
+    margin: 45px auto 0 auto;
+    padding: 0;
+    margin-top: 45px;
+    max-width: 880px;
+    max-height: 74px;
+    text-align: left;
+    border-bottom: 1px solid #545454;
+}

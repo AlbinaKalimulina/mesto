@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <script src="./scripts/script.js" type="module"></script>
+    <title>Сервис Mesto</title>
+</head>
+
+<body class="page">
+    <!-- Шапка сайта-->
+    <header class="header">
+        <img class="header__logo" src="./images/logo.svg" alt="Лого место Россия">
+    </header>
+
+    <main class="content">
+
+        <!-- Профиль-->
+        <section class="profile">
+            <img class="profile__avatar" src="./images/Avatar.jpg" alt="фото профиля">
+            <div class="profile__info" aria-label="Информация профиля">
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <p class="profile__description">Исследователь океана</p>
+            </div>
+            <button class="profile__edit-button profile__edit-button_popup-open" type="button" aria-label="Редактировать"></button>
+            <button class="profile__add-button" type="button" aria-label="Добавить"></button>
+        </section>
+
+        <section class="elements" aria-label="Фотографии красивых мест">
+            <ul class="element">
+
+                <li class="card">
+                    <img class="card__image" src="./images/karachaevo-cherkessk.jpg" alt="Карачаевск">
+                    <div class="card__title">
+                        <h2 class="card__place-name">Карачаевск</h2>
+                        <button class="card__like-button" type="button"></button>
+                    </div>
+                </li>
+
+                <li class="card">
+                    <img class="card__image" src="./images/Elbrus.jpg" alt="Гора Эльбрус">
+                    <div class="card__title">
+                        <h2 class="card__place-name">Гора Эльбрус</h2>
+                        <button class="card__like-button card__like-button_active" type="button"></button>
+                    </div>
+                </li>
+
+                <li class="card">
+                    <img class="card__image" src="./images/Dombai.jpg" alt="Домбай">
+                    <div class="card__title">
+                        <h2 class="card__place-name">Домбай</h2>
+                        <button class="card__like-button" type="button"></button>
+                    </div>
+                </li>
+
+
+                <li class="card">
+                    <img class="card__image" src="./images/Elbrus.jpg" alt="Гора Эльбрус">
+                    <div class="card__title">
+                        <h2 class="card__place-name">Гора Эльбрус</h2>
+                        <button class="card__like-button" type="button"></button>
+                    </div>
+                </li>
+
+                <li class="card">
+                    <img class="card__image" src="./images/Dombai.jpg" alt="Домбай">
+                    <div class="card__title">
+                        <h2 class="card__place-name">Домбай</h2>
+                        <button class="card__like-button" type="button"></button>
+                    </div>
+                </li>
+
+                <li class="card">
+                    <img class="card__image" src="./images/karachaevo-cherkessk.jpg" alt="Карачаевск">
+                    <div class="card__title">
+                        <h2 class="card__place-name">Карачаевск</h2>
+                        <button class="card__like-button" type="button"></button>
+                    </div>
+                </li>
+
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- Подвал сайта-->
+    <footer class="footer">
+        <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
+    </footer>
+</body>
+
+</html>
