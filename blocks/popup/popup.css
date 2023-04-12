@@ -4,8 +4,9 @@
     left: 0;
     bottom: 0;
     right: 0;
-    /* display: none;*/
+    display: none;
     padding: 195px 425px 0;
     color: #000000;
     font-family: 'Inter', Arial, sans-serif;
+    max-width: 430px;
 }
