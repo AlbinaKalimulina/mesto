@@ -11,3 +11,10 @@
     font-family: 'Inter', Arial, sans-serif;
     max-width: 430px;
 }
+
+@media screen and (max-width: 644px) {
+    .popup {
+      padding: 123px 19px 0;
+      max-width: 282px;
+    }
+  }
