@@ -1,0 +1,6 @@
+.popup__input_name {
+    margin: 0;
+    font-family: inherit;
+    /* Теперь поле ввода наследует шрифт от родителя */
+    outline: none;
+}
