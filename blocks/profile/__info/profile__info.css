@@ -5,6 +5,7 @@
 
 @media screen and (max-width: 395px) {
   .profile__info {
+    padding: 0;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
