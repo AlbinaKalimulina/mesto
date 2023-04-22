@@ -3,7 +3,7 @@
   padding-left: 30px;
 }
 
-@media screen and (max-width: 395px) {
+@media screen and (max-width: 644px) {
   .profile__info {
     padding: 0;
     display: flex;

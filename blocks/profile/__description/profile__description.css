@@ -11,6 +11,12 @@
   max-width: 336px;
 }
 
+@media screen and (max-width: 929px) {
+  .profile__description {
+    max-width: 290px;
+  }
+}
+
 @media screen and (max-width: 644px) {
   .profile__description {
     max-width: 282px;
