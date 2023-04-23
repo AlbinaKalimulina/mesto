@@ -43,3 +43,72 @@ function handleFormSubmit(evt) {
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', handleFormSubmit);
+
+
+
+// Карточки template
+/*import { initialCards } from './constants.js';*/
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+
+const cardTemplate = document.getElementById('card-template');
+const elementGridContainer = document.querySelector('.element');
+
+const createCardElement = (cardData) => {
+  const cardElement = cardTemplate.content.querySelector('.card').cloneNode(true);
+
+  const cardImage = cardElement.querySelector('.card__image');
+  const cardTitle = cardElement.querySelector('.card__place-name');
+  const cardDeleteButton = cardElement.querySelector('.card__delete-button');
+  const cardLikeButton = cardElement.querySelector('.card__like-button');
+
+
+  cardTitle.textContent = cardData.name;
+  cardImage.src = cardData.link;
+  cardImage.alt = cardData.name;
+
+  const handleDelete = () => {
+    cardElement.remove();
+  };
+
+  const handleLike = (evt) => {
+    cardLikeButton.classList.toggle('.card__like-button_active');
+  };
+
+  cardDeleteButton.addEventListener('click', handleDelete);
+  cardLikeButton.addEventListener('click', handleLike);
+
+  return cardElement;
+};
+
+initialCards.forEach ((card) => {
+  const element = createCardElement(card);
+
+  elementGridContainer.appendChild(element);
+});
