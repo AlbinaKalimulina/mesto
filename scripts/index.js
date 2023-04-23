@@ -1,3 +1,5 @@
+// Попап редактирования профиля
+
 const openPopupButton = document.querySelector('.profile__edit-button');
 const popup = document.querySelector('.popup');
 const popupCloseButton = document.querySelector('.popup__close-button');
@@ -98,7 +100,7 @@ const createCardElement = (cardData) => {
   };
 
   const handleLike = (evt) => {
-    cardLikeButton.classList.toggle('.card__like-button_active');
+    cardLikeButton.classList.toggle('card__like-button_active');
   };
 
   cardDeleteButton.addEventListener('click', handleDelete);
