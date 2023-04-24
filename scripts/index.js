@@ -1,6 +1,6 @@
 // Попап редактирования профиля
 
-const openPopupButton = document.querySelector('.profile__edit-button');
+const openPopupEditButton = document.querySelector('.profile__edit-button');
 const popupEdit = document.querySelector('.popup__edit');
 const popupCloseButton = document.querySelector('.popup__close-button');
 let formElement = document.querySelector('.popup__container'); // Находим форму в DOM
@@ -9,14 +9,14 @@ let jobInput = document.querySelector('.popup__input_type_descrition'); // На�
 let profileName = document.querySelector('.profile__name');
 let profileJob = document.querySelector('.profile__description');
 
-function openPopup() {
+function openPopupEdit() {
   popupEdit.classList.add('popup_opened');
 
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
 
-function closePopup(evt) {
+function closePopupEdit(evt) {
   const isOverlay = evt.target.classList.contains('popup');
   const isCloseButton = evt.target.classList.contains('popup__close-button');
 
@@ -25,8 +25,8 @@ function closePopup(evt) {
   }
 }
 
-openPopupButton.addEventListener('click', openPopup);
-popupEdit.addEventListener('click', closePopup);
+openPopupEditButton.addEventListener('click', openPopupEdit);
+popupEdit.addEventListener('click', closePopupEdit);
 
 
 // // Обработчик «отправки» формы, хотя пока
