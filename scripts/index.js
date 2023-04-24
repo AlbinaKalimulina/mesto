@@ -73,14 +73,14 @@ function closePopupAdd(evt) {
 openPopupAddButton.addEventListener('click', openPopupAdd);
 popupAdd.addEventListener('click', closePopupAdd);
 
-function handleFormSubmit(evt) {
+/*function handleFormSubmit(evt) {
   evt.preventDefault();
   placeName.textContent = placeNameInput.value;
   placeLink.textContent = placeLinkInput.value;
   popupAdd.classList.remove('popup_opened');
 }
 
-formElement.addEventListener('submit', handleFormSubmit);
+formElement.addEventListener('submit', handleFormSubmit);*/
 
 
 
