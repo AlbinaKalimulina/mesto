@@ -32,7 +32,7 @@
         <!-- Карточки-->
         <section class="elements" aria-label="Фотографии красивых мест">
             <div class="element">
-                 <!--  <li class="card">
+                <!--  <li class="card">
                     <button class="card__delete-button" type="button"></button>
                     <img class="card__image" src="./images/karachaevo-cherkessk.jpg" alt="Карачаевск">
                     <div class="card__title">
@@ -100,9 +100,21 @@
     </footer>
 
 
+    <!-- Карточки template-->
+    <template id="card-template">
+
+        <div class="card">
+            <button class="card__delete-button" type="button"></button>
+            <img class="card__image">
+            <div class="card__title">
+                <h2 class="card__place-name"></h2>
+                <button class="card__like-button card__like-button_active" type="button"></button>
+            </div>
+
+    </template>
 
     <!-- Попап редактирования профиля-->
-    <div class="popup">
+    <div class="popup popup__edit">
         <div class="popup__content">
             <button class="popup__close-button" type="button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
@@ -119,21 +131,28 @@
             </form>
         </div>
     </div>
-    
 
-    <template id="card-template">
+    <!-- Попап добавления карточек-->
+    <div class="popup popup__add">
+        <div class="popup__content">
+            <button class="popup__close-button" type="button"></button>
+            <h2 class="popup__title">Новое место</h2>
 
-            <div class="card">
-                <button class="card__delete-button" type="button"></button>
-                <img class="card__image">
-                <div class="card__title">
-                    <h2 class="card__place-name"></h2>
-                    <button class="card__like-button card__like-button_active" type="button"></button>
-                </div>
+            <form class="popup__container" name="placeCard">
 
-    </template>
-   
+                <input class="popup__input popup__input_type_place-name" name="placename" type="text"
+                    placeholder="Название" required>
+
+                <input class="popup__input popup__input_type_place-link" name="placelink" type="url"
+                    placeholder="Ссылка на картинку" required>
+
+                <button class="popup__save-button" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
     <script src="./scripts/index.js"></script>
 </body>
+
 
 </html>

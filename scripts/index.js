@@ -1,7 +1,7 @@
 // Попап редактирования профиля
 
 const openPopupButton = document.querySelector('.profile__edit-button');
-const popup = document.querySelector('.popup');
+const popupEdit = document.querySelector('.popup__edit');
 const popupCloseButton = document.querySelector('.popup__close-button');
 let formElement = document.querySelector('.popup__container'); // Находим форму в DOM
 let nameInput = document.querySelector('.popup__input_type_name'); // Находим поля формы в DOM
@@ -10,7 +10,7 @@ let profileName = document.querySelector('.profile__name');
 let profileJob = document.querySelector('.profile__description');
 
 function openPopup() {
-  popup.classList.add('popup_opened');
+  popupEdit.classList.add('popup_opened');
 
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
@@ -21,12 +21,12 @@ function closePopup(evt) {
   const isCloseButton = evt.target.classList.contains('popup__close-button');
 
   if (isOverlay || isCloseButton) {
-    popup.classList.remove('popup_opened');
+    popupEdit.classList.remove('popup_opened');
   }
 }
 
 openPopupButton.addEventListener('click', openPopup);
-popup.addEventListener('click', closePopup);
+popupEdit.addEventListener('click', closePopup);
 
 
 // // Обработчик «отправки» формы, хотя пока
@@ -39,7 +39,7 @@ function handleFormSubmit(evt) {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
 
-  popup.classList.remove('popup_opened');
+  popupEdit.classList.remove('popup_opened');
 }
 
 // Прикрепляем обработчик к форме:
@@ -48,8 +48,43 @@ formElement.addEventListener('submit', handleFormSubmit);
 
 
 
+// Попап добавления карточек
+
+const openPopupAddButton = document.querySelector('.profile__add-button');
+const popupAdd = document.querySelector('.popup__add');
+let placeNameInput = document.querySelector('.popup__input_type_place-name'); // Находим поля формы в DOM
+let placeLinkInput = document.querySelector('.popup__input_type_place-link'); // Находим поля формы в DOM
+let placeName = document.querySelector('.card__place-name');
+let placeLink = document.querySelector('.card__image');
+
+function openPopupAdd() {
+  popupAdd.classList.add('popup_opened');
+}
+
+function closePopupAdd(evt) {
+  const isOverlay = evt.target.classList.contains('popup');
+  const isCloseButton = evt.target.classList.contains('popup__close-button');
+
+  if (isOverlay || isCloseButton) {
+    popupAdd.classList.remove('popup_opened');
+  }
+}
+
+openPopupAddButton.addEventListener('click', openPopupAdd);
+popupAdd.addEventListener('click', closePopupAdd);
+
+function handleFormSubmit(evt) {
+  evt.preventDefault();
+  placeName.textContent = placeNameInput.value;
+  placeLink.textContent = placeLinkInput.value;
+  popupAdd.classList.remove('popup_opened');
+}
+
+formElement.addEventListener('submit', handleFormSubmit);
+
+
+
 // Карточки template
-/*import { initialCards } from './constants.js';*/
 
 const initialCards = [
   {
@@ -109,7 +144,7 @@ const createCardElement = (cardData) => {
   return cardElement;
 };
 
-initialCards.forEach ((card) => {
+initialCards.forEach((card) => {
   const element = createCardElement(card);
 
   elementGridContainer.appendChild(element);
