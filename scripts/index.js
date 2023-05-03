@@ -31,7 +31,7 @@ popupEdit.addEventListener('click', closePopupEdit);
 
 // // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
-function handleFormSubmit(evt) {
+function handleEditFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   // Так мы можем определить свою логику отправки.
   // О том, как это делать, расскажем позже.
@@ -44,7 +44,7 @@ function handleFormSubmit(evt) {
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formEditElement.addEventListener('submit', handleFormSubmit);
+formEditElement.addEventListener('submit', handleEditFormSubmit);
 
 
 // Карточки template
@@ -76,7 +76,6 @@ const initialCards = [
   }
 ];
 
-
 const cardTemplate = document.getElementById('card-template');
 const elementGridContainer = document.querySelector('.element');
 
@@ -87,7 +86,6 @@ const createCardElement = (cardData) => {
   const cardTitle = cardElement.querySelector('.card__place-name');
   const cardDeleteButton = cardElement.querySelector('.card__delete-button');
   const cardLikeButton = cardElement.querySelector('.card__like-button');
-
 
   cardTitle.textContent = cardData.name;
   cardImage.src = cardData.link;
@@ -103,6 +101,31 @@ const createCardElement = (cardData) => {
 
   cardDeleteButton.addEventListener('click', handleDelete);
   cardLikeButton.addEventListener('click', handleLike);
+
+  // Открытие попапа с картинкой
+  const popupImage = document.querySelector('.popup__image');
+  let popupCardImage = document.querySelector('.popup__card-image');
+  let popupCardDescription = document.querySelector('.popup__card-description');
+
+  function openPopupImage() {
+    popupImage.classList.add('popup_opened');
+    popupCardImage.src = cardData.link;
+    popupCardImage.alt = cardData.name;
+    popupCardDescription.textContent = cardData.name;
+  }
+
+  cardImage.addEventListener('click', openPopupImage);
+
+  function closePopupImage(evt) {
+    const isOverlay = evt.target.classList.contains('popup__image');
+    const isCloseButton = evt.target.classList.contains('popup__close-button');
+
+    if (isOverlay || isCloseButton) {
+      popupImage.classList.remove('popup_opened');
+    }
+  }
+
+  popupImage.addEventListener('click', closePopupImage);
 
   return cardElement;
 };
@@ -140,7 +163,7 @@ function closePopupAdd(evt) {
   }
 }
 
-function handleAddFormSubmit (evt) {
+function handleAddFormSubmit(evt) {
   evt.preventDefault();
   const name = placeNameInput.value;
   const link = placeLinkInput.value;
@@ -157,6 +180,3 @@ function handleAddFormSubmit (evt) {
 openPopupAddButton.addEventListener('click', openPopupAdd);
 popupAdd.addEventListener('click', closePopupAdd);
 formAddElement.addEventListener('submit', handleAddFormSubmit);
-
-
-
