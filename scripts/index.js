@@ -1,9 +1,9 @@
 // Попап редактирования профиля
 
 const openPopupEditButton = document.querySelector('.profile__edit-button');
-const popupEdit = document.querySelector('.popup__edit');
+const popupEdit = document.querySelector('.popup_edit');
 const popupCloseButton = document.querySelector('.popup__close-button');
-let formEditElement = document.querySelector('.popup__edit_type_container'); // Находим форму в DOM
+let formEditElement = document.querySelector('.popup_edit_type_container'); // Находим форму в DOM
 let nameInput = document.querySelector('.popup__input_type_name'); // Находим поля формы в DOM
 let jobInput = document.querySelector('.popup__input_type_descrition'); // Находим поля формы в DOM
 let profileName = document.querySelector('.profile__name');
@@ -103,7 +103,7 @@ const createCardElement = (cardData) => {
   cardLikeButton.addEventListener('click', handleLike);
 
   // Открытие попапа с картинкой
-  const popupImage = document.querySelector('.popup__image');
+  const popupImage = document.querySelector('.popup_image');
   let popupCardImage = document.querySelector('.popup__card-image');
   let popupCardDescription = document.querySelector('.popup__card-description');
 
@@ -143,8 +143,8 @@ initialCards.forEach((card) => {
 // Попап добавления карточек
 
 const openPopupAddButton = document.querySelector('.profile__add-button');
-const popupAdd = document.querySelector('.popup__add');
-let formAddElement = document.querySelector('.popup__add_type_container'); // Находим форму в DOM
+const popupAdd = document.querySelector('.popup_add');
+let formAddElement = document.querySelector('.popup_add_type_container'); // Находим форму в DOM
 let placeNameInput = document.querySelector('.popup__input_type_place-name'); // Находим поля формы в DOM
 let placeLinkInput = document.querySelector('.popup__input_type_place-link'); // Находим поля формы в DOM
 let placeName = document.querySelector('.card__place-name');
