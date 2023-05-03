@@ -1,5 +1,6 @@
 // Объявляем переменные
 const popup = document.querySelector('.popup'); // Общий попап
+
 const openPopupEditButton = document.querySelector('.profile__edit-button');
 const popupEdit = document.querySelector('.popup_edit');
 const popupEditCloseButton = popupEdit.querySelector('.popup__close-button');
