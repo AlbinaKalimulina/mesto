@@ -3,7 +3,7 @@
 const openPopupEditButton = document.querySelector('.profile__edit-button');
 const popupEdit = document.querySelector('.popup_edit');
 const popupCloseButton = document.querySelector('.popup__close-button');
-let formEditElement = document.querySelector('.popup_edit__container'); // Находим форму в DOM
+let formEditElement = document.querySelector('.popup_edit_container'); // Находим форму в DOM
 let nameInput = document.querySelector('.popup__input_type_name'); // Находим поля формы в DOM
 let jobInput = document.querySelector('.popup__input_type_descrition'); // Находим поля формы в DOM
 let profileName = document.querySelector('.profile__name');
@@ -144,7 +144,7 @@ initialCards.forEach((card) => {
 
 const openPopupAddButton = document.querySelector('.profile__add-button');
 const popupAdd = document.querySelector('.popup_add');
-let formAddElement = document.querySelector('.popup_add__container'); // Находим форму в DOM
+let formAddElement = document.querySelector('.popup_add_container'); // Находим форму в DOM
 let placeNameInput = document.querySelector('.popup__input_type_place-name'); // Находим поля формы в DOM
 let placeLinkInput = document.querySelector('.popup__input_type_place-link'); // Находим поля формы в DOM
 let placeName = document.querySelector('.card__place-name');
