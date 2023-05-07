@@ -48,7 +48,7 @@ const closePopupEdit = (evt) => {
   const isOverlay = evt.target.classList.contains('popup');
   const isCloseButton = evt.target.classList.contains('popup__close-button');
 
-  if (isOverlay || isCloseButton) {
+  if (isOverlay || isCloseButton || evt.key === 'Escape') {
     closePopup(popupEdit);
   }
 }
@@ -99,12 +99,15 @@ const createCardElement = (cardData) => {
     const isOverlay = evt.target.classList.contains('popup');
     const isCloseButton = evt.target.classList.contains('popup__close-button');
 
-    if (isOverlay || isCloseButton) {
+    if (isOverlay || isCloseButton || evt.key === 'Escape') {
       closePopup(popupImage);
     }
   }
 
+  document.addEventListener('keydown', closePopupImage); // добавление обработчика события для закрытия попапа нажатием на Esc
   popupImage.addEventListener('click', closePopupImage);
+  
+
   return cardElement;
 };
 
@@ -127,7 +130,7 @@ const closePopupAdd = (evt) => {
   const isOverlay = evt.target.classList.contains('popup');
   const isCloseButton = evt.target.classList.contains('popup__close-button');
 
-  if (isOverlay || isCloseButton) {
+  if (isOverlay || isCloseButton || evt.key === 'Escape') {
     closePopup(popupAdd);
   }
 }
@@ -151,9 +154,12 @@ function handleAddFormSubmit(evt) {
 openPopupEditButton.addEventListener('click', openPopupEdit);
 popupEdit.addEventListener('click', closePopupEdit);
 formEditElement.addEventListener('submit', handleEditFormSubmit); // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
+document.addEventListener('keydown', closePopupEdit); // добавление обработчика события для закрытия попапа нажатием на Esc
 
 openPopupAddButton.addEventListener('click', openPopupAdd);
 popupAdd.addEventListener('click', closePopupAdd);
 formAddElement.addEventListener('submit', handleAddFormSubmit); // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
+document.addEventListener('keydown', closePopupAdd); // добавление обработчика события для закрытия попапа нажатием на Esc
+
 
 
