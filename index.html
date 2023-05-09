@@ -61,16 +61,20 @@
             <button class="popup__close-button" type="button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
 
-            <form class="popup__container popup__edit-container" name="profile">
+            <form class="popup__container popup__edit-container" name="profile" novalidate>
 
-                <input class="popup__input popup__input_type_name" name="username" type="text" placeholder="Введите имя"
-                    required>
+                <input class="popup__input popup__input_type_name" id="username" name="username" type="text"
+                    placeholder="Введите имя" required minlength="2" maxlength="40">
+                <span class="error-message popup__error" id="username-error"></span>
 
-                <input class="popup__input popup__input_type_descrition" name="description" type="text"
-                    placeholder="Введите вид деятельности" required>
+                <input class="popup__input popup__input_type_descrition" id="description" name="description" type="text"
+                    placeholder="Введите вид деятельности" required minlength="2" maxlength="200">
+                <span class="error-message popup__error" id="description-error"></span>
 
-                <button class="popup__save-button" type="submit">Сохранить</button>
+                <button class="popup__save-button popup_edit_save-button popup__button_disabled"
+                    type="submit">Сохранить</button>
             </form>
+
         </div>
     </div>
 
@@ -80,16 +84,18 @@
             <button class="popup__close-button" type="button"></button>
             <h2 class="popup__title">Новое место</h2>
 
-            <form class="popup__container popup__add-container" name="placeCard">
+            <form class="popup__container popup__add-container" name="placeCard" novalidate>
 
-                <input class="popup__input popup__input_type_place-name" name="placename" type="text"
-                    placeholder="Название" required>
+                <input class="popup__input popup__input_type_place-name" id="placename" name="placename" type="text"
+                    placeholder="Название" required minlength="2" maxlength="30">
+                <span class="error-message popup__error" id="placename-error"></span>
 
-                <input class="popup__input popup__input_type_place-link" name="placelink" type="url"
+                <input class="popup__input popup__input_type_place-link" id="placelink" name="placelink" type="url"
                     placeholder="Ссылка на картинку" required>
-
-                <button class="popup__save-button" type="submit">Сохранить</button>
+                <span class="error-message popup__error" id="placelink-error"></span>
+                <button class="popup__save-button popup__save-button_disabled" type="submit">Сохранить</button>
             </form>
+
         </div>
     </div>
 
@@ -104,8 +110,8 @@
         </div>
     </div>
 
-    <script src="./scripts/validate.js"></script>
     <script src="./scripts/constants.js"></script>
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/index.js"></script>
 </body>
 

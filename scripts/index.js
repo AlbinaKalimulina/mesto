@@ -106,7 +106,7 @@ const createCardElement = (cardData) => {
 
   document.addEventListener('keydown', closePopupImage); // добавление обработчика события для закрытия попапа нажатием на Esc
   popupImage.addEventListener('click', closePopupImage);
-  
+
 
   return cardElement;
 };
@@ -123,6 +123,9 @@ initialCards.forEach((card) => {
 
 // Попап добавления карточек
 const openPopupAdd = () => {
+  const button = popupAdd.querySelector('.popup__save-button');
+  button.classList.add('popup__save-button_disabled');
+  button.setAttribute('disabled', true);
   openPopup(popupAdd);
 }
 
@@ -137,6 +140,7 @@ const closePopupAdd = (evt) => {
 
 function handleAddFormSubmit(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы, так мы можем определить свою логику отправки.
+
   const name = placeNameInput.value;
   const link = placeLinkInput.value;
 
@@ -160,6 +164,3 @@ openPopupAddButton.addEventListener('click', openPopupAdd);
 popupAdd.addEventListener('click', closePopupAdd);
 formAddElement.addEventListener('submit', handleAddFormSubmit); // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
 document.addEventListener('keydown', closePopupAdd); // добавление обработчика события для закрытия попапа нажатием на Esc
-
-
-

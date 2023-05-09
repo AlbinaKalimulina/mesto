@@ -13,9 +13,9 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.popup__input:first-child {
+/* .popup__input:first-child {
   margin-bottom: 30px;
-}
+} */
 
 
 @media screen and (max-width: 644px) {
