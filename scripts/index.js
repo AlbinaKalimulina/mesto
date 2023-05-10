@@ -1,3 +1,5 @@
+// Gennadiy Barsegyan, СПАСИБО! 
+
 // Объявляем переменные
 const popups = document.querySelectorAll('.popup'); // Общий попап
 
@@ -28,13 +30,6 @@ const elementGridContainer = document.querySelector('.element');
 // Объявляем функции
 
 // Универсальные функции для открытия и закрытия любых попапов
-function closeByEscape(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened'); // нашли открытый попап
-    closePopup(openedPopup); //закрыли попап с помощью функции `closePopup`
-  }
-}
-
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEscape);
@@ -56,6 +51,12 @@ popups.forEach((popup) => {
   })
 })
 
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened'); // нашли открытый попап
+    closePopup(openedPopup); //закрыли попап с помощью функции `closePopup`
+  }
+}
 
 // Попап редактирования профиля
 const openPopupEdit = () => {
@@ -133,6 +134,7 @@ function handleAddFormSubmit(evt) {
     name,
     link,
   };
+  
   const button = popupAdd.querySelector('.popup__save-button');
   button.classList.add('popup__save-button_disabled');
   button.setAttribute('disabled', true);
