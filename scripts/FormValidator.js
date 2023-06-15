@@ -46,17 +46,17 @@ export default class FormValidator {
         }
     }
     // Сделай кнопку доступной
-    _enableButton = (button) => {
-        button.classList.remove(this._inactiveButtonClass);
-        button.removeAttribute('disabled', true);
+    _enableButton = () => {
+        this._formButton .classList.remove(this._inactiveButtonClass);
+        this._formButton .removeAttribute('disabled', true);
     }
 
     // Сделай кнопку недоступной
-    _disableButton = (button) => {
-        button.classList.add(this._inactiveButtonClass);
-        button.setAttribute('disabled', true);
+    _disableButton = () => {
+        this._formButton.classList.add(this._inactiveButtonClass);
+        this._formButton.setAttribute('disabled', true);
     }
-    _hasInvalidInput = (formInputs) => {
-        return formInputs.some(item => !item.validity.valid); // true/false
+    _hasInvalidInput = () => {
+        return this._formInputs.some(item => !item.validity.valid); // true/false
     }
 }

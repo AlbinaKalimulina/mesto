@@ -1,17 +1,15 @@
 export default class Card {
     constructor(cardData, selectorTemplate, openPopupImage) {
         this._cardData = cardData;
-        this._link = cardData.link;
-        this._name = cardData.name;
         this._selectorTemplate = selectorTemplate;
         this._openPopupImage = openPopupImage;
     }
+
     _getTemplate() {
         return document.querySelector(this._selectorTemplate).content.querySelector('.card').cloneNode(true);
     }
 
     _handleLike = () => {
-        console.log(this)
         this._likeButton.classList.toggle('card__like-button_active');
     }
 
@@ -31,9 +29,9 @@ export default class Card {
         this._likeButton = this._cloneElement.querySelector('.card__like-button');
         this._deleteButton = this._cloneElement.querySelector('.card__delete-button');
         this._placeName = this._cloneElement.querySelector('.card__place-name');
-        this._placeImage.src = this._link;
-        this._placeImage.alt = this._name;
-        this._placeName.textContent = this._name;
+        this._placeImage.src = this._cardData.link;
+        this._placeImage.alt = this._cardData.name;
+        this._placeName.textContent = this._cardData.name;
         this._setEventListeners();
         return this._cloneElement;
     }
