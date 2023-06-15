@@ -87,40 +87,28 @@ function openPopupImage(cardData) {
   popupCardDescription.textContent = cardData.name;
 }
 
+function createCard(name, link) {
+ const newCardData = {
+    name,
+    link,
+  };
+ const card = new Card(newCardData, selectorTemplate, openPopupImage);
+ return card;
+}
+
 function addNewCard(container, card) {
   container.prepend(card);
 }
 
 initialCards.forEach(element => {
-  const card = new Card(element, selectorTemplate, openPopupImage);
+
+  const card = createCard(element.name, element.link)
   addNewCard(cardElement, card.createCard());
 });
-
 
 // Попап добавления карточек
 const openPopupAdd = () => {
   openPopup(popupAdd);
-}
-
-function handleAddFormSubmit(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы, так мы можем определить свою логику отправки.
-
-  const name = placeNameInput.value;
-  const link = placeLinkInput.value;
-
-  const initialCards = {
-    name,
-    link,
-  };
-
-  const button = popupAdd.querySelector('.popup__save-button');
-  button.classList.add('popup__save-button_disabled');
-  button.setAttribute('disabled', true);
-
-  const card = new Card(initialCards, selectorTemplate, openPopupImage);
-  addNewCard(cardElement, card.createCard());
-  closePopup(popupAdd);
-  evt.target.reset();
 }
 
 const formValidatorAdd = new FormValidator(validationConfig, formAddElement);
@@ -128,6 +116,20 @@ const formValidatorEdit = new FormValidator(validationConfig, formEditElement);
 
 formValidatorAdd.enableValidation();
 formValidatorEdit.enableValidation();
+
+const handleAddFormSubmit = (evt) => {
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы, так мы можем определить свою логику отправки.
+
+  const name = placeNameInput.value;
+  const link = placeLinkInput.value;
+
+  formValidatorAdd.disableButton();
+
+  const card = createCard(name, link)
+  addNewCard(cardElement, card.createCard());
+  closePopup(popupAdd);
+  evt.target.reset();
+}
 
 // Обработчики
 openPopupEditButton.addEventListener('click', openPopupEdit);
