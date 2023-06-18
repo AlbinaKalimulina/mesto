@@ -1,6 +1,6 @@
-import initialCards from './constants.js'
-import Card from './Card.js'
-import FormValidator from './FormValidator.js'
+import initialCards from './scripts/utils/constants.js'
+import Card from './scripts/components/Card.js'
+import FormValidator from './scripts/components/FormValidator.js'
 
 // Объявляем переменные
 const popups = document.querySelectorAll('.popup'); // Общий попап
