@@ -27,17 +27,6 @@ export default class PopupWithForm extends Popup {
         this._form.addEventListener('submit', this._submitFunction);
     }
 
-    
-
-    // ДЕЛАЕТ МЕТОД _getInputValues ПРИВАТНЫМ, КАК ТРЕБУЕТСЯ В ЗАДАНИИ
-    // setEventListeners() {
-    //     super.setEventListeners();
-    //     this._form.addEventListener('submit', (evt) => {
-    //         evt.preventDefault();
-    //         this._submitFunction(this._getInputValues());
-    //     });
-    // }
-
     close() {
         super.close();
         this._form.reset();
