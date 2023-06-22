@@ -17,10 +17,15 @@ export default class Card {
         this._cloneElement.remove();
     }
 
+    _handleCardClick = () => {
+        this._openPopupImage(this._cardData);
+    }
+
+
     _setEventListeners() {
         this._likeButton.addEventListener('click', this._handleLike);
         this._deleteButton.addEventListener('click', this._handleDelete);
-        this._placeImage.addEventListener('click', () => { this._openPopupImage(this._cardData) });
+        this._placeImage.addEventListener('click', this._handleCardClick);
     }
 
     createCard() {
@@ -29,9 +34,9 @@ export default class Card {
         this._likeButton = this._cloneElement.querySelector('.card__like-button');
         this._deleteButton = this._cloneElement.querySelector('.card__delete-button');
         this._placeName = this._cloneElement.querySelector('.card__place-name');
-        this._placeImage.src = this._cardData.link;
-        this._placeImage.alt = this._cardData.name;
-        this._placeName.textContent = this._cardData.name;
+        this._placeImage.src = this._cardData.placelink;
+        this._placeImage.alt = this._cardData.placename;
+        this._placeName.textContent = this._cardData.placename;
         this._setEventListeners();
         return this._cloneElement;
     }

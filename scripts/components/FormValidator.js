@@ -5,14 +5,34 @@ export default class FormValidator {
         this._inactiveButtonClass = validationConfig.inactiveButtonClass;
         this._inputErrorClass = validationConfig.inputErrorClass;
         this._errorClass = validationConfig.errorClass;
+        this._textErrorClass = validationConfig.textErrorClass;
         this._form = form;
     }
+
+    resetErrorInput() {
+        this._formInputs.forEach((input) => {
+            const errorTextElement = this._form.querySelector(`#${input.id}-error`)
+            if (!input.validity.valid) {
+                this._hideInputError(errorTextElement, input)
+            }
+        })
+        this.disableButton();
+    }
+
+
+    _hideInputError(errorTextElement, input) {
+        input.classList.remove(this._inputErrorClass);
+        errorTextElement.textContent = '';
+        errorTextElement.classList.remove(this._textErrorClass)
+    }
+
 
     enableValidation = () => {
         this._formButton = this._form.querySelector(this._submitButtonSelector);
         this._formInputs = Array.from(this._form.querySelectorAll(this._inputSelector));
         this._setEventListeners();
     };
+
 
     // Накладываем слушатели для запуска валидации
     _setEventListeners = () => {
