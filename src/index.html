@@ -18,7 +18,9 @@
 
         <!-- Профиль-->
         <section class="profile">
-            <img class="profile__avatar" src="<%=require('./images/Avatar.jpg')%>" alt="фото профиля">
+            <button type="button" class="avatar__button">
+                <img class="profile__avatar" src="<%=require('./images/Avatar.jpg')%>" alt="фото профиля">
+            </button>
             <div class="profile__info" aria-label="Информация профиля">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <p class="profile__description">Исследователь океана</p>
@@ -26,7 +28,6 @@
             <button class="profile__edit-button" type="button" aria-label="Редактировать"></button>
             <button class="profile__add-button" type="button" aria-label="Добавить"></button>
         </section>
-
 
 
         <!-- Карточки-->
@@ -95,7 +96,6 @@
                 <span class="error-message popup__error" id="placelink-error"></span>
                 <button class="popup__save-button" type="submit">Сохранить</button>
             </form>
-
         </div>
     </div>
 
@@ -107,6 +107,32 @@
                 <img class="popup__card-image" src="#" alt="#">
                 <figcaption class="popup__card-description"></figcaption>
             </figure>
+        </div>
+    </div>
+
+
+    <!-- Попап изменения аватара пользователя-->
+    <div class="popup popup_userphoto">
+        <div class="popup__content">
+            <button class="popup__close-button" type="button"></button>
+            <h2 class="popup__title">Обновить аватар</h2>
+            <form class="popup__container popup__userphoto-container" name="avatar" novalidate>
+                <input class="popup__input popup__input_type_userphoto-link" id="userphotolink" name="userphoto"
+                    type="url" placeholder="Ссылка на картинку" required>
+                <span class="error-message popup__error" id="userphotolink-error"></span>
+                <button class="popup__save-button" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Попап удаления карточки-->
+    <div class="popup popup_delete">
+        <div class="popup__content">
+            <button class="popup__close-button" type="button"></button>
+            <h2 class="popup__title">Вы уверены?</h2>
+            <form class="popup__container popup__deletecard-container" name="deleteCard" novalidate>
+                <button class="popup__save-button" type="submit">Да</button>
+            </form>
         </div>
     </div>
 

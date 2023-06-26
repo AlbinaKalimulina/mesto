@@ -1,8 +1,9 @@
 export default class Card {
-    constructor(cardData, selectorTemplate, openPopupImage) {
+    constructor(cardData, selectorTemplate, openPopupImage, openDeleteCardPopup) {
         this._cardData = cardData;
         this._selectorTemplate = selectorTemplate;
         this._openPopupImage = openPopupImage;
+        this._openDeleteCardPopup = openDeleteCardPopup;
     }
 
     _getTemplate() {
@@ -14,7 +15,7 @@ export default class Card {
     }
 
     _handleDelete = () => {
-        this._cloneElement.remove();
+        this._openDeleteCardPopup(this);
     }
 
     _handleCardClick = () => {
@@ -26,6 +27,10 @@ export default class Card {
         this._likeButton.addEventListener('click', this._handleLike);
         this._deleteButton.addEventListener('click', this._handleDelete);
         this._placeImage.addEventListener('click', this._handleCardClick);
+    }
+
+    removeCard() {
+        this._cloneElement.remove();
     }
 
     createCard() {

@@ -26,15 +26,20 @@ const initialCards = [
 ];
 
 const openPopupEditButton = document.querySelector('.profile__edit-button');
-const formEditElement = document.querySelector('.popup__edit-container');
 const openPopupAddButton = document.querySelector('.profile__add-button');
-const formAddElement = document.querySelector('.popup__add-container');
+
+const profileForm = document.forms["profile"];
+const cardForm = document.forms["placeCard"];
+const avatarForm = document.forms["avatar"];
+const deleteCardForm = document.forms["deleteCard"];
 
 const selectorTemplate = '#card-template';
 const popupEditSelector = '.popup_edit';
 const popupImageSelector = '.popup_image';
 const cardElementSelector = '.element';
 const popupAddSelector = '.popup_add';
+const popupAvatarSelector = '.popup_userphoto';
+const popupDeleteCardSelector = '.popup_delete';
 
 const validationConfig = {
   formSelector: '.popup__container',
@@ -53,14 +58,18 @@ const configInfo = {
 export {
   initialCards,
   openPopupEditButton,
-  formEditElement,
+  profileForm,
   openPopupAddButton,
-  formAddElement,
+  cardForm, 
   selectorTemplate,
   popupEditSelector,
   popupImageSelector,
   cardElementSelector,
   popupAddSelector,
+  popupAvatarSelector,
+  popupDeleteCardSelector,
   validationConfig,
-  configInfo
+  configInfo,
+  avatarForm, 
+  deleteCardForm
 }
