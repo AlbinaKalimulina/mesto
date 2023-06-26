@@ -53,6 +53,7 @@ const validationConfig = {
 const configInfo = {
   profileNameSelector: '.profile__name',
   profileJobSelector: '.profile__description',
+  profileAvatar: '.profile__avatar',
 }
 
 export {

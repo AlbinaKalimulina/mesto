@@ -11,6 +11,12 @@ export default class Section {
         });
     }
 
+    //  renderItems(dataCard) {
+    //     dataCard.forEach(element => {
+    //         this.renderer(element)
+    //     })
+    // }
+
     addItem(elementDom) {
         this._container.prepend(elementDom);
     }

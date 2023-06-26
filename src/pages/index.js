@@ -6,7 +6,8 @@ import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import Section from '../scripts/components/Section.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
-import PopupCardDelete from '../scripts/components/PopupCardDelete';
+import PopupCardDelete from '../scripts/components/PopupCardDelete.js';
+import Api from '../scripts/components/Api.js';
 
 import {
   initialCards,
@@ -26,6 +27,14 @@ import {
   avatarForm,
   deleteCardForm
 } from '../scripts/utils/constants.js'
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-69',
+  headers: {
+    authorization: '961112be-ea9b-423a-bd3d-e30631a423a3',
+    'Content-Type': 'application/json'
+  }
+});
 
 const userInfo = new UserInfo(configInfo);
 
@@ -55,6 +64,10 @@ const section = new Section({
     section.addItem(createNewCard(element));
   }
 }, cardElementSelector);
+
+// const section = new Section((element) => {
+//     section.addItem(createNewCard(element))
+// }, cardElementSelector);
 
 section.renderItems();
 
@@ -93,7 +106,7 @@ const popupEditAvatar = new PopupWithForm(popupAvatarSelector, (data) => {
 })
 
 
-document.querySelector('.avatar__button').addEventListener('click', () => {
+document.querySelector('.profile__avatar-button').addEventListener('click', () => {
   formValidatorAdd.resetErrorInput()
   popupEditAvatar.open();
 })
@@ -118,3 +131,8 @@ formValidatorDeleteCard.enableValidation();
 
 openPopupEditButton.addEventListener('click', openPopupEdit);
 
+Promise.all([api.getInfo(), api.getCards()])
+  .then(([dataUser, dataCard]) => {
+    dataCard.forEach(element => element.myId = dataUser._id)
+    userInfo.setUserInfo({ username: dataUser.name, description: dataUser.about, userphoto: dataUser.avatar })
+  })
