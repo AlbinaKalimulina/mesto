@@ -59,7 +59,7 @@ function createNewCard(element) {
 }
 
 const section = new Section({
-  items: initialCards,
+  // items: initialCards,
   renderer: (element) => {
     section.addItem(createNewCard(element));
   }
@@ -69,7 +69,7 @@ const section = new Section({
 //     section.addItem(createNewCard(element))
 // }, cardElementSelector);
 
-section.renderItems();
+// section.renderItems();
 
 
 // const popupProfile = new PopupWithForm(popupEditSelector, (evt) => {
@@ -79,7 +79,12 @@ section.renderItems();
 // })
 
 const popupProfile = new PopupWithForm(popupEditSelector, (data) => {
-  userInfo.setUserInfo(data);
+  api.setUserInfo(data)
+    .then(res => {
+      userInfo.setUserInfo({ username: res.name, description: res.about, userphoto: res.avatar });
+    })
+    .catch((error => console.error(`Ошибка при редактировании профиля ${error}`)))
+    .finally()
   popupProfile.close();
 })
 
@@ -93,15 +98,27 @@ popupProfile.setEventListeners();
 // })
 
 const popupAdd = new PopupWithForm(popupAddSelector, (data) => {
-  section.addItem(createNewCard(data));
-  popupAdd.close();
+  Promise.all([api.getInfo(), api.addCard(data)])
+    .then(([dataUser, dataCard]) => {
+      dataCard.myid = dataUser._id;
+      section.addItem(createNewCard(dataCard));
+      popupAdd.close();
+    })
+    // section.addItem(createNewCard(data));
+    .catch((error => console.error(`Ошибка при создании новой краточки ${error}`)))
+    .finally()
 })
 
 
 popupAdd.setEventListeners();
 
 const popupEditAvatar = new PopupWithForm(popupAvatarSelector, (data) => {
-  document.querySelector('.profile__avatar').src = data.userphoto;
+  api.setAvatar(data)
+    .then(res => {
+      userInfo.setUserInfo({ username: res.name, description: res.about, userphoto: res.avatar });
+    })
+    .catch((error => console.error(`Ошибка при обновлении аватара ${error}`)))
+    .finally()
   popupEditAvatar.close();
 })
 
@@ -122,17 +139,17 @@ openPopupAddButton.addEventListener('click', () => {
 const formValidatorAdd = new FormValidator(validationConfig, cardForm);
 const formValidatorEdit = new FormValidator(validationConfig, profileForm);
 const formValidatorEditAvatar = new FormValidator(validationConfig, avatarForm);
-const formValidatorDeleteCard = new FormValidator(validationConfig, deleteCardForm);
 
 formValidatorAdd.enableValidation();
 formValidatorEdit.enableValidation();
 formValidatorEditAvatar.enableValidation();
-formValidatorDeleteCard.enableValidation();
 
 openPopupEditButton.addEventListener('click', openPopupEdit);
 
 Promise.all([api.getInfo(), api.getCards()])
   .then(([dataUser, dataCard]) => {
-    dataCard.forEach(element => element.myId = dataUser._id)
-    userInfo.setUserInfo({ username: dataUser.name, description: dataUser.about, userphoto: dataUser.avatar })
+    dataCard.forEach(element => element.myid = dataUser._id)
+    userInfo.setUserInfo({ username: dataUser.name, description: dataUser.about, userphoto: dataUser.avatar });
+    section.renderItems(dataCard.reverse());
   })
+  .catch((error => console.error(`Ошибка при создании начальных данных страницы ${error}`)))

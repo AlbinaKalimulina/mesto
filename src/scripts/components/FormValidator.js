@@ -36,7 +36,7 @@ export default class FormValidator {
 
     // Накладываем слушатели для запуска валидации
     _setEventListeners = () => {
-        // this.disableButton(this._formButton);
+        this.disableButton(this._formButton);
 
         this._formInputs.forEach(input => {
             input.addEventListener('input', () => {

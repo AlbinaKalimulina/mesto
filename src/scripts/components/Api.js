@@ -27,6 +27,38 @@ export default class Api {
             .then(this._checkResponse)
     }
 
+    setUserInfo(data) {
+        return fetch(`${this._url}/users/me`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({
+                name: data.username,
+                about: data.description,
+            })
+        })
+            .then(this._checkResponse)
+    }
 
+    setAvatar(data) {
+        return fetch(`${this._url}/users/me/avatar`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({
+                avatar: data.userphoto,
+            })
+        })
+            .then(this._checkResponse)
+    }
 
+    addCard(data) {
+        return fetch(`${this._url}/cards`, {
+            method: 'POST',
+            headers: this._headers,
+            body: JSON.stringify({
+                name: data.placename,
+                link: data.placelink,
+            })
+        })
+            .then(this._checkResponse)
+    }
 }
