@@ -20,7 +20,6 @@ export default class Api {
 
     getCards() {
         return fetch(`${this._url}/cards`, {
-            // return fetch(`https://mesto.nomoreparties.co/v1/cohort-69/cards`, {
             headers: {
                 authorization: this._authorization
             }
