@@ -35,7 +35,7 @@ export default class Card {
         this._placeImage.addEventListener('click', this._handleCardClick);
     }
 
-    _changeVisibleForDeleteButton() {
+    _changeDeleteButtonDisplay() {
         this._myId === this._ownerId ? this._deleteButton.style.display = 'block' : this._deleteButton.style.display = 'none';
     }
 
@@ -68,7 +68,7 @@ export default class Card {
         this._placeImage.src = this._cardData.link;
         this._placeImage.alt = this._cardData.name;
         this._placeName.textContent = this._cardData.name;
-        this._changeVisibleForDeleteButton();
+        this._changeDeleteButtonDisplay();
         this._checkLikes();
         this._setEventListeners();
         return this._cloneElement;
