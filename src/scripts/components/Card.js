@@ -1,16 +1,18 @@
 export default class Card {
-    constructor(cardData, selectorTemplate, openPopupImage, openDeleteCardPopup) {
-        // console.log(cardData)
+    constructor(cardData, selectorTemplate, openPopupImage, openDeleteCardPopup, changeLike) {
+        console.log(cardData)
         this._cardData = cardData;
         // this._link = cardData.link;
         // this._name = cardData.name;
         this._myId = cardData.myid;
         this._ownerId = cardData.owner._id;
+        this._cardId = cardData._id;
         this._likes = cardData.likes;
         this._likesLength = cardData.likes.length;
         this._selectorTemplate = selectorTemplate;
         this._openPopupImage = openPopupImage;
         this._openDeleteCardPopup = openDeleteCardPopup;
+        this._changeLike = changeLike;
         //  console.log(this._myId) //undefined
         //  console.log(this._ownerId)
     }
@@ -20,7 +22,8 @@ export default class Card {
     }
 
     _handleLike = () => {
-        this._likeButton.classList.toggle('card__like-button_active');
+        this._changeLike(this._likeButton, this._cardId);
+        // this._likeButton.classList.toggle('card__like-button_active');
     }
 
     _handleDelete = () => {
@@ -44,12 +47,17 @@ export default class Card {
 
     _checkLikes() {
         this._likes.forEach(element => {
-            if(element._id === this._myId) {
+            if (element._id === this._myId) {
                 this._likeButton.classList.add('card__like-button_active');
                 return
             }
         })
         this._counter.textContent = this._likesLength
+    }
+
+    toogleLike(likes) {
+        this._likeButton.classList.toggle('card__like-button_active');
+        this._counter.textContent = likes.length;
     }
 
     removeCard() {
@@ -63,9 +71,12 @@ export default class Card {
         this._deleteButton = this._cloneElement.querySelector('.card__delete-button');
         this._placeName = this._cloneElement.querySelector('.card__place-name');
         this._counter = this._cloneElement.querySelector('.likes__counter');
-        this._placeImage.src = this._cardData.placelink;
-        this._placeImage.alt = this._cardData.placename;
-        this._placeName.textContent = this._cardData.placename;
+        // this._placeImage.src = this._cardData.placelink;
+        // this._placeImage.alt = this._cardData.placename;
+        // this._placeName.textContent = this._cardData.placename;
+        this._placeImage.src = this._cardData.link;
+        this._placeImage.alt = this._cardData.name;
+        this._placeName.textContent = this._cardData.name;
         this._changeVisibleForDeleteButton();
         this._checkLikes();
         this._setEventListeners();

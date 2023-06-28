@@ -47,14 +47,33 @@ const openPopupEdit = () => {
 }
 
 const deleteCardPopup = new PopupCardDelete(popupDeleteCardSelector, (element) => {
-  element.removeCard();
+  api.deleteCard(element._cardId)
+  .then(res => {
+    element.removeCard(res);
+  })
   deleteCardPopup.close();
 });
 
 deleteCardPopup.setEventListeners();
 
 function createNewCard(element) {
-  const card = new Card(element, selectorTemplate, popupImage.open, deleteCardPopup.open);
+  const card = new Card(element, selectorTemplate, popupImage.open, deleteCardPopup.open, (likeElement, cardId) => {
+    if (likeElement.classList.contains('card__like-button_active')) {
+      api.deleteLike(cardId)
+        .then(res => {
+          console.log(res)
+          card.toogleLike(res.likes)
+        })
+        .catch((error => console.error(`Ошибка при снятии лайка ${error}`)))
+    } else {
+      api.addLike(cardId)
+      .then(res => {
+        console.log(res)
+        card.toogleLike(res.likes)
+      })
+      .catch((error => console.error(`Ошибка при добавлении лайка ${error}`)))
+    }
+  });
   return card.createCard();
 }
 

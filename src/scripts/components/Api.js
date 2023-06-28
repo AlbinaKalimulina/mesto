@@ -19,7 +19,8 @@ export default class Api {
     }
 
     getCards() {
-        return fetch(`${this._url}/cards `, {
+        return fetch(`${this._url}/cards`, {
+            // return fetch(`https://mesto.nomoreparties.co/v1/cohort-69/cards`, {
             headers: {
                 authorization: this._authorization
             }
@@ -61,4 +62,36 @@ export default class Api {
         })
             .then(this._checkResponse)
     }
+
+    addLike(cardId) {
+        return fetch(`${this._url}/cards/${cardId}/likes`, {
+            method: 'PUT',
+            headers: {
+                authorization: this._authorization
+            }
+        })
+            .then(this._checkResponse)
+    }
+
+    deleteLike(cardId) {
+        return fetch(`${this._url}/cards/${cardId}/likes`, {
+            method: 'DELETE',
+            headers: {
+                authorization: this._authorization
+            }
+        })
+            .then(this._checkResponse)
+    }
+
+    deleteCard(cardId) {
+        return fetch(`${this._url}/cards/${cardId}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: this._authorization
+            }
+        })
+        .then(this._checkResponse)
+    }
+
+
 }
