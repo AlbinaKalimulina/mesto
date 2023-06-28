@@ -10,7 +10,6 @@ import PopupCardDelete from '../scripts/components/PopupCardDelete.js';
 import Api from '../scripts/components/Api.js';
 
 import {
-  initialCards,
   openPopupEditButton,
   profileForm,
   openPopupAddButton,
@@ -24,8 +23,7 @@ import {
   popupDeleteCardSelector,
   validationConfig,
   configInfo,
-  avatarForm,
-  deleteCardForm
+  avatarForm
 } from '../scripts/utils/constants.js'
 
 const api = new Api({
@@ -48,10 +46,13 @@ const openPopupEdit = () => {
 
 const deleteCardPopup = new PopupCardDelete(popupDeleteCardSelector, (element) => {
   api.deleteCard(element._cardId)
-  .then(res => {
-    element.removeCard(res);
-  })
-  deleteCardPopup.close();
+    .then(res => {
+      element.removeCard(res);
+      deleteCardPopup.close();
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 });
 
 deleteCardPopup.setEventListeners();
@@ -64,57 +65,42 @@ function createNewCard(element) {
           console.log(res)
           card.toogleLike(res.likes)
         })
-        .catch((error => console.error(`Ошибка при снятии лайка ${error}`)))
+        .catch((error) => {
+          console.log(error)
+        })
     } else {
       api.addLike(cardId)
-      .then(res => {
-        console.log(res)
-        card.toogleLike(res.likes)
-      })
-      .catch((error => console.error(`Ошибка при добавлении лайка ${error}`)))
+        .then(res => {
+          console.log(res)
+          card.toogleLike(res.likes)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   });
   return card.createCard();
 }
 
 const section = new Section({
-  // items: initialCards,
   renderer: (element) => {
     section.addItem(createNewCard(element));
   }
 }, cardElementSelector);
 
-// const section = new Section((element) => {
-//     section.addItem(createNewCard(element))
-// }, cardElementSelector);
-
-// section.renderItems();
-
-
-// const popupProfile = new PopupWithForm(popupEditSelector, (evt) => {
-//   evt.preventDefault();
-//   userInfo.setUserInfo(popupProfile.getInputValues());
-//   popupProfile.close();
-// })
-
 const popupProfile = new PopupWithForm(popupEditSelector, (data) => {
   api.setUserInfo(data)
     .then(res => {
       userInfo.setUserInfo({ username: res.name, description: res.about, userphoto: res.avatar });
+      popupProfile.close();
     })
-    .catch((error => console.error(`Ошибка при редактировании профиля ${error}`)))
-    .finally()
-  popupProfile.close();
+    .catch((error) => {
+      console.log(error)
+    })
+    .finally(() => popupProfile.setDefaultText())
 })
 
 popupProfile.setEventListeners();
-
-
-// const popupAdd = new PopupWithForm(popupAddSelector, (evt) => {
-//   evt.preventDefault();
-//   section.addItem(section.renderer(popupAdd.getInputValues()));
-//   popupAdd.close();
-// })
 
 const popupAdd = new PopupWithForm(popupAddSelector, (data) => {
   Promise.all([api.getInfo(), api.addCard(data)])
@@ -123,9 +109,10 @@ const popupAdd = new PopupWithForm(popupAddSelector, (data) => {
       section.addItem(createNewCard(dataCard));
       popupAdd.close();
     })
-    // section.addItem(createNewCard(data));
-    .catch((error => console.error(`Ошибка при создании новой краточки ${error}`)))
-    .finally()
+    .catch((error) => {
+      console.log(error)
+    })
+    .finally(() => popupAdd.setDefaultText());
 })
 
 
@@ -135,10 +122,12 @@ const popupEditAvatar = new PopupWithForm(popupAvatarSelector, (data) => {
   api.setAvatar(data)
     .then(res => {
       userInfo.setUserInfo({ username: res.name, description: res.about, userphoto: res.avatar });
+        popupEditAvatar.close();
     })
-    .catch((error => console.error(`Ошибка при обновлении аватара ${error}`)))
-    .finally()
-  popupEditAvatar.close();
+    .catch((error) => {
+      console.log(error)
+    })
+    .finally(() => popupEditAvatar.setDefaultText())
 })
 
 
@@ -171,4 +160,6 @@ Promise.all([api.getInfo(), api.getCards()])
     userInfo.setUserInfo({ username: dataUser.name, description: dataUser.about, userphoto: dataUser.avatar });
     section.renderItems(dataCard.reverse());
   })
-  .catch((error => console.error(`Ошибка при создании начальных данных страницы ${error}`)))
+  .catch((error) => {
+    console.log(error)
+  })

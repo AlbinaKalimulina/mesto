@@ -49,3 +49,5 @@
 
 @import url(../blocks/popup/__title/_type_delete/popup__title_type_delete.css);
 @import url(../blocks/profile/__avatar-button/profile__avatar-button.css);
+@import url(../blocks/card/__likes-counter/card__likes-counter.css);
+@import url(../blocks/card/__like-group/card__like-group.css);
