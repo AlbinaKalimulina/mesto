@@ -4,6 +4,7 @@ export default class PopupCardDelete extends Popup {
     constructor(selectorPopup, submitFunction) {
         super(selectorPopup);
         this._submitFunction = submitFunction;
+        this._form = this._popup.querySelector('.popup__container');
     }
 
     setEventListeners(){

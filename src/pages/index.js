@@ -58,8 +58,9 @@ const deleteCardPopup = new PopupCardDelete(popupDeleteCardSelector, (element) =
 deleteCardPopup.setEventListeners();
 
 function createNewCard(element) {
-  const card = new Card(element, selectorTemplate, popupImage.open, deleteCardPopup.open, (likeElement, cardId) => {
-    if (likeElement.classList.contains('card__like-button_active')) {
+
+  const card = new Card(element, selectorTemplate, popupImage.open, deleteCardPopup.open, (isLiked, cardId) => {
+    if (isLiked) {
       api.deleteLike(cardId)
         .then(res => {
           console.log(res)
@@ -74,9 +75,7 @@ function createNewCard(element) {
           console.log(res)
           card.toogleLike(res.likes)
         })
-        .catch((error) => {
-          console.log(error)
-        })
+        .catch(console.error)
     }
   });
   return card.createCard();
@@ -132,7 +131,7 @@ const popupEditAvatar = new PopupWithForm(popupAvatarSelector, (data) => {
 
 
 document.querySelector('.profile__avatar-button').addEventListener('click', () => {
-  formValidatorAdd.resetErrorInput()
+  formValidatorEditAvatar.resetErrorInput();
   popupEditAvatar.open();
 })
 
