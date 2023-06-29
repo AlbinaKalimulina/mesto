@@ -102,7 +102,7 @@ const popupProfile = new PopupWithForm(popupEditSelector, (data) => {
 popupProfile.setEventListeners();
 
 const popupAdd = new PopupWithForm(popupAddSelector, (data) => {
-  Promise.all([api.getInfo(), api.addCard(data)])
+  Promise.all([api.addCard(data)])
     .then(([dataUser, dataCard]) => {
       dataCard.myid = dataUser._id;
       section.addItem(createNewCard(dataCard));
