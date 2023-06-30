@@ -15,5 +15,3 @@ export default class UserInfo {
         return { username: this._profileName.textContent, description: this._profileJob.textContent };
     }
 }
-
-
