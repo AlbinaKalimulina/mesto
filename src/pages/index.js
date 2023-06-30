@@ -57,25 +57,28 @@ const deleteCardPopup = new PopupCardDelete(popupDeleteCardSelector, (element) =
 
 deleteCardPopup.setEventListeners();
 
-function createNewCard(element) {
-
-  const card = new Card(element, selectorTemplate, popupImage.open, deleteCardPopup.open, (isLiked, cardId) => {
+function createNewCard(cardItem) {
+  const card = new Card(cardItem, selectorTemplate, popupImage.open, deleteCardPopup.open, 
+    () => {
+    const isLiked = card.isLikedByMe();
     if (isLiked) {
-      api.deleteLike(cardId)
+      api.deleteLike(cardItem._id)
         .then(res => {
-          console.log(res)
-          card.toogleLike(res.likes)
+          card.updateLikesCount(res.likes);
+          card.toogleLike();
         })
         .catch((error) => {
           console.log(error)
         })
     } else {
-      api.addLike(cardId)
+      api.addLike(cardItem._id)
         .then(res => {
-          console.log(res)
-          card.toogleLike(res.likes)
+          card.updateLikesCount(res.likes);
+          card.toogleLike();
         })
-        .catch(console.error)
+        .catch((error) => {
+          console.log(error)
+        })
     }
   });
   return card.createCard();
@@ -103,8 +106,8 @@ popupProfile.setEventListeners();
 
 const popupAdd = new PopupWithForm(popupAddSelector, (data) => {
   Promise.all([api.addCard(data)])
-    .then(([dataUser, dataCard]) => {
-      dataCard.myid = dataUser._id;
+    .then(([dataCard]) => {
+      dataCard.myId = dataCard.owner._id;
       section.addItem(createNewCard(dataCard));
       popupAdd.close();
     })
@@ -121,7 +124,7 @@ const popupEditAvatar = new PopupWithForm(popupAvatarSelector, (data) => {
   api.setAvatar(data)
     .then(res => {
       userInfo.setUserInfo({ username: res.name, description: res.about, userphoto: res.avatar });
-        popupEditAvatar.close();
+      popupEditAvatar.close();
     })
     .catch((error) => {
       console.log(error)
